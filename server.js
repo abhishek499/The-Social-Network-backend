@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -9,13 +10,18 @@ const app = express();
 
 // CORS
 const options = {
-  origin: "http://localhost:3001",
+  origin: "*",
   useSuccessStatus: 200,
 };
 
 // Middlewares
 app.use(express.json());
 app.use(cors(options));
+app.use(
+  fileUpload({
+    useTempFile: true,
+  })
+);
 
 //Traditional Routing
 // const userRoutes = require("./routes/user");
